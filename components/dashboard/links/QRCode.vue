@@ -22,7 +22,8 @@ const options = {
   imageOptions: { hideBackgroundDots: true, imageSize: 0.4, margin: 2 },
   dotsOptions: { type: 'dots', color: '#000000', gradient: null },
   backgroundOptions: { color: '#ffffff', gradient: null },
-  image: props.image,
+  image: 'https://s3.jkf.tw/jkf.png',
+  // image: props.image,
   dotsOptionsHelper: {
     colorType: { single: true, gradient: false },
     gradient: {

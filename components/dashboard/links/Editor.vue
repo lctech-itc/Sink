@@ -168,11 +168,11 @@ const { previewMode } = useRuntimeConfig().public
                 class="w-4 h-4 cursor-pointer"
                 @click="randomSlug"
               />
-              <Sparkles
+              <!-- <Sparkles
                 class="w-4 h-4 cursor-pointer"
                 :class="{ 'animate-bounce': aiSlugPending }"
                 @click="aiSlug"
-              />
+              /> -->
             </div>
             <AutoFormField
               v-bind="slotProps"
