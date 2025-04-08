@@ -2,10 +2,10 @@ import type { LocaleObject } from '@nuxtjs/i18n'
 
 const locales: LocaleObject[] = [
   {
-    code: 'zh-CN',
-    file: 'zh-CN.json',
-    name: '简体中文',
-    emoji: '🇨🇳',
+    code: 'zh-TW',
+    file: 'zh-TW.json',
+    name: '正體中文',
+    emoji: '🇹🇼',
   },
   {
     code: 'en-US',

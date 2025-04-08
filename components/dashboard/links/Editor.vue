@@ -2,7 +2,7 @@
 import { DependencyType } from '@/components/ui/auto-form/interface'
 import { LinkSchema, nanoid } from '@/schemas/link'
 import { toTypedSchema } from '@vee-validate/zod'
-import { Shuffle, Sparkles } from 'lucide-vue-next'
+import { Shuffle } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
 import { toast } from 'vue-sonner'
 import { z } from 'zod'
@@ -77,25 +77,25 @@ function randomSlug() {
   form.setFieldValue('slug', nanoid()())
 }
 
-const aiSlugPending = ref(false)
-async function aiSlug() {
-  if (!form.values.url)
-    return
+// const aiSlugPending = ref(false)
+// async function aiSlug() {
+//   if (!form.values.url)
+//     return
 
-  aiSlugPending.value = true
-  try {
-    const { slug } = await useAPI('/api/link/ai', {
-      query: {
-        url: form.values.url,
-      },
-    })
-    form.setFieldValue('slug', slug)
-  }
-  catch (error) {
-    console.log(error)
-  }
-  aiSlugPending.value = false
-}
+//   aiSlugPending.value = true
+//   try {
+//     const { slug } = await useAPI('/api/link/ai', {
+//       query: {
+//         url: form.values.url,
+//       },
+//     })
+//     form.setFieldValue('slug', slug)
+//   }
+//   catch (error) {
+//     console.log(error)
+//   }
+//   aiSlugPending.value = false
+// }
 
 onMounted(() => {
   if (link.value.expiration) {
@@ -131,11 +131,7 @@ const { previewMode } = useRuntimeConfig().public
   <Dialog v-model:open="dialogOpen">
     <DialogTrigger as-child>
       <slot>
-        <Button
-          class="ml-2"
-          variant="outline"
-          @click="randomSlug"
-        >
+        <Button class="ml-2" variant="destructive" @click="randomSlug">
           {{ $t('links.create') }}
         </Button>
       </slot>
@@ -144,48 +140,29 @@ const { previewMode } = useRuntimeConfig().public
       <DialogHeader>
         <DialogTitle>{{ link.id ? $t('links.edit') : $t('links.create') }}</DialogTitle>
       </DialogHeader>
-      <p
-        v-if="previewMode"
-        class="text-sm text-muted-foreground"
-      >
+      <p v-if="previewMode" class="text-sm text-muted-foreground">
         {{ $t('links.preview_mode_tip') }}
       </p>
       <AutoForm
-        class="overflow-y-auto px-2 space-y-2"
-        :schema="EditLinkSchema"
-        :form="form"
-        :field-config="fieldConfig"
-        :dependencies="dependencies"
-        @submit="onSubmit"
+        class="px-2 space-y-2 overflow-y-auto" :schema="EditLinkSchema" :form="form" :field-config="fieldConfig"
+        :dependencies="dependencies" @submit="onSubmit"
       >
         <template #slug="slotProps">
-          <div
-            v-if="!isEdit"
-            class="relative"
-          >
-            <div class="flex absolute right-0 top-1 space-x-3">
-              <Shuffle
-                class="w-4 h-4 cursor-pointer"
-                @click="randomSlug"
-              />
+          <div v-if="!isEdit" class="relative">
+            <div class="absolute right-0 flex space-x-3 top-1">
+              <Shuffle class="w-4 h-4 cursor-pointer" @click="randomSlug" />
               <!-- <Sparkles
                 class="w-4 h-4 cursor-pointer"
                 :class="{ 'animate-bounce': aiSlugPending }"
                 @click="aiSlug"
               /> -->
             </div>
-            <AutoFormField
-              v-bind="slotProps"
-            />
+            <AutoFormField v-bind="slotProps" />
           </div>
         </template>
         <DialogFooter>
           <DialogClose as-child>
-            <Button
-              type="button"
-              variant="secondary"
-              class="mt-2 sm:mt-0"
-            >
+            <Button type="button" variant="secondary" class="mt-2 sm:mt-0">
               {{ $t('common.close') }}
             </Button>
           </DialogClose>
