@@ -20,9 +20,9 @@ const options = {
   margin: 10,
   qrOptions: { typeNumber: '0', mode: 'Byte', errorCorrectionLevel: 'Q' },
   imageOptions: { hideBackgroundDots: true, imageSize: 0.3, margin: 3 },
-  dotsOptions: { type: 'extra-rounded', color: '#000000', gradient: null },
+  dotsOptions: { type: 'classy', color: '#000000', gradient: null },
   backgroundOptions: { color: '#ffffff', gradient: null },
-  image: 'https://s3.jkf.tw/jkf.png',
+  image: '/jkf.png',
   // image: props.image,
   dotsOptionsHelper: {
     colorType: { single: true, gradient: false },
@@ -45,7 +45,7 @@ const options = {
       rotation: '0',
     },
   },
-  cornersDotOptions: { type: 'dot', color: '#000000' },
+  cornersDotOptions: { color: '#000000' },
   cornersDotOptionsHelper: {
     colorType: { single: true, gradient: false },
     gradient: {
