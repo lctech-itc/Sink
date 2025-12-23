@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const route = useRoute()
+</script>
+
 <template>
   <main class="flex min-h-screen flex-col">
     <LayoutsHeader />
@@ -6,6 +10,6 @@
         <slot />
       </div>
     </section>
-    <LayoutsFooter />
+    <LayoutsFooter v-if="route.path !== '/'" />
   </main>
 </template>

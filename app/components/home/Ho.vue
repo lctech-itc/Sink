@@ -10,6 +10,7 @@ const features = ref([
     img: 'https://www.ap-ea.asia/upload/images/2022_10_21_081045.jpg',
     url: 'https://jkf.net',
     color: 'from-red-600 to-red-800',
+    glow: 'rgba(220, 38, 38, 0.15)',
   },
   {
     title: 'JKForum.net',
@@ -18,6 +19,7 @@ const features = ref([
     img: 'https://www.ap-ea.asia/upload/images/2022_10_21_081045.jpg',
     url: 'https://jkforum.net',
     color: 'from-red-600 to-red-800',
+    glow: 'rgba(220, 38, 38, 0.15)',
   },
   {
     title: 'JKFace.net',
@@ -26,8 +28,8 @@ const features = ref([
     img: 'https://www.ap-ea.asia/upload/images/2025_01_23_024957.jpg',
     url: 'https://jkface.net',
     color: 'from-red-500 to-rose-700',
+    glow: 'rgba(244, 63, 94, 0.15)',
   },
-
   {
     title: 'JKF AV+',
     description: '世界最快發片平台 台灣唯一全片商授權正版平台',
@@ -35,6 +37,7 @@ const features = ref([
     img: 'https://www.ap-ea.asia/upload/images/2022_10_21_081404.jpg',
     url: 'https://av.jkforum.net',
     color: 'from-red-600 to-rose-800',
+    glow: 'rgba(225, 29, 72, 0.15)',
   },
   {
     title: 'JR24h.com',
@@ -43,6 +46,7 @@ const features = ref([
     img: 'https://www.ap-ea.asia/upload/images/2022_10_21_081555.jpg',
     url: 'https://jr24h.com',
     color: 'from-rose-600 to-red-800',
+    glow: 'rgba(225, 29, 72, 0.15)',
   },
   {
     title: 'JVID.com',
@@ -51,6 +55,7 @@ const features = ref([
     img: 'https://www.ap-ea.asia/upload/images/2022_10_21_081136.jpg',
     url: 'https://jvid.com',
     color: 'from-red-700 to-red-900',
+    glow: 'rgba(185, 28, 28, 0.15)',
   },
 ])
 
@@ -59,196 +64,122 @@ const isVisible = ref(false)
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
-  }, 300)
+  }, 100)
 })
+
+function handleMouseMove(e) {
+  const card = e.currentTarget
+  const rect = card.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+  card.style.setProperty('--mouse-x', `${x}px`)
+  card.style.setProperty('--mouse-y', `${y}px`)
+}
 </script>
 
 <template>
-  <div>
+  <div class="h-screen overflow-hidden bg-white transition-colors duration-500 dark:bg-[#050505]">
     <!-- 粒子背景 -->
     <ParticleBackground />
 
     <!-- 主要內容 -->
-    <main class="relative z-10 flex flex-col overflow-hidden py-4 md:py-6">
+    <main class="relative z-10 flex h-full flex-col px-4 py-4 md:py-6">
       <!-- 標題區域 -->
-      <div class="mb-4 flex-shrink-0 px-4 md:mb-6">
-        <div
-          class="mx-auto flex w-fit items-center gap-3 rounded-full bg-gradient-to-br from-white/90 to-gray-100/90 px-6 py-3 backdrop-blur-xl md:gap-4 md:px-8 md:py-4 dark:from-zinc-900/90 dark:to-black/90"
-          :class="{ 'animate-fade-in': isVisible }"
-        >
-          <!-- JKF 標題框 -->
-          <div class="relative">
-            <!-- 標題文字 -->
-            <h2 class="relative z-10 px-4 py-2 text-3xl font-bold md:px-6 md:py-3 md:text-4xl lg:text-5xl">
-              <span class="text-gray-900 dark:text-white">JK</span><span class="text-red-500">F</span>
-            </h2>
+      <header
+        class="mb-6 flex-shrink-0 text-center md:mb-8"
+        :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4']"
+        style="transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);"
+      >
+        <div class="inline-block">
+          <div class="relative mb-2">
+            <h1 class="text-5xl font-black tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
+              <span class="text-black dark:text-white">JK</span><span class="text-red-600">F</span>
+            </h1>
+            <!-- 背景發光 -->
+            <div class="absolute -inset-x-8 -inset-y-4 -z-10 bg-red-600/10 blur-[60px] dark:bg-red-600/20" />
           </div>
-
-          <!-- 副標題 -->
-          <div class="relative">
-            <p class="whitespace-nowrap text-sm text-gray-900 md:text-base lg:text-lg dark:text-white">
+          <div class="flex items-center justify-center gap-3">
+            <div class="h-px w-5 bg-red-600/50 md:w-8" />
+            <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-gray-500 md:text-[10px] dark:text-gray-400">
               亞洲第一男性娛樂品牌
             </p>
-            <!-- 發光效果 -->
-            <div
-              class="absolute inset-0 animate-pulse bg-gradient-to-r from-red-500/10 via-red-200/10 to-red-500/10 blur-xl dark:from-red-500/20 dark:via-white/10 dark:to-red-500/20"
-            />
+            <div class="h-px w-5 bg-red-600/50 md:w-8" />
           </div>
         </div>
-      </div>
+      </header>
 
-      <!-- 特色卡片網格 - 使用 flex-1 和 overflow-auto -->
-      <div class="flex-1 overflow-y-auto px-4">
-        <div class="mx-auto max-w-7xl">
+      <!-- 特色卡片網格 - 滾動區域 -->
+      <div class="flex-1 overflow-y-auto px-2 pb-6 custom-scrollbar">
+        <div class="mx-auto w-full max-w-6xl">
           <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            <div
-              v-for="(item, index) in features" :key="item.title"
-              class="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-105"
-              :class="{ 'animate-slide-up': isVisible }" :style="{ 'animation-delay': `${index * 200}ms` }"
+            <a
+              v-for="(item, index) in features"
+              :key="item.title"
+              :href="item.url"
+              target="_blank"
+              class="group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white/40 p-1 transition-all duration-500 hover:-translate-y-1 hover:border-red-500/30 hover:shadow-[0_10px_30px_rgba(220,38,38,0.1)] dark:border-white/5 dark:bg-zinc-900/40 dark:hover:border-red-500/20"
+              :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']"
+              :style="{ transitionDelay: `${index * 100}ms`, transitionDuration: '0.8s', transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }"
+              @mousemove="handleMouseMove"
             >
-              <!-- 液態玻璃外層 -->
-              <div
-                class="liquid-glass-card absolute inset-0 rounded-2xl border border-gray-200/30 bg-gradient-to-br from-white/80 via-gray-50/60 to-white/80 backdrop-blur-xl dark:border-white/10 dark:from-white/5 dark:via-black/40 dark:to-white/5"
-              >
-                <!-- 流動光澤 -->
+              <!-- 圖片容器 - 更加扁平 -->
+              <div class="relative aspect-[16/6] overflow-hidden rounded-[1.2rem]">
+                <img
+                  :src="item.img"
+                  :alt="item.title"
+                  class="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+                >
+                <!-- 圖片遮罩 -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40" />
+
+                <!-- 圖標懸浮 - 更加緊湊 -->
                 <div
-                  class="animate-liquid-shimmer absolute inset-0 bg-gradient-to-tr from-transparent via-red-500/10 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100 dark:via-white/10"
-                />
+                  class="absolute bottom-3 left-3 flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 p-2 shadow-2xl backdrop-blur-xl transition-all duration-500 group-hover:scale-110 group-hover:bg-red-600"
+                >
+                  <component :is="item.icon" class="h-full w-full text-white transition-colors duration-300" />
+                </div>
               </div>
 
-              <!-- 玻璃邊緣高光 -->
-              <div
-                class="absolute inset-0 rounded-2xl bg-gradient-to-br from-red-500/10 via-transparent to-red-500/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-white/20 dark:to-red-500/20"
-              />
+              <!-- 文字內容 - 緊湊佈局 -->
+              <div class="flex flex-1 flex-col px-4 py-3">
+                <div class="mb-1 flex items-center justify-between">
+                  <h3 class="text-base font-bold tracking-tight text-gray-900 dark:text-white">
+                    {{ item.title }}
+                  </h3>
+                  <div class="h-1 w-1 rounded-full bg-red-600 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </div>
+                <p class="text-[11px] leading-snug text-gray-500 dark:text-gray-400">
+                  {{ item.description }}
+                </p>
 
-              <!-- 紅色發光邊框 -->
-              <div
-                class="absolute inset-0 rounded-2xl bg-gradient-to-r opacity-0 blur-sm transition-opacity duration-500 group-hover:opacity-30"
-                :class="item.color"
-              />
-
-              <!-- 內層玻璃效果 -->
-              <div
-                class="absolute inset-[1px] rounded-2xl bg-gradient-to-br from-white/95 via-gray-50/95 to-white/95 backdrop-blur-sm dark:from-black/80 dark:via-zinc-900/80 dark:to-black/80"
-              />
-
-              <!-- 玻璃反射條紋 -->
-              <div class="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-gray-200/20 to-transparent opacity-50 dark:from-white/5" />
-              <div
-                class="absolute right-0 top-0 h-full w-1/4 bg-gradient-to-l from-red-500/10 to-transparent opacity-30 dark:from-red-500/5"
-              />
-
-              <!-- 卡片內容 -->
-              <div class="relative z-10 p-4">
-                <!-- 上方魔法閃爍點 -->
-                <div class="mb-3 flex justify-end">
-                  <div class="flex space-x-1">
-                    <div
-                      class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500"
-                      :style="{ 'animation-delay': `${index * 100}ms` }"
-                    />
-                    <div
-                      class="h-1.5 w-1.5 animate-pulse rounded-full bg-white"
-                      :style="{ 'animation-delay': `${index * 150}ms` }"
-                    />
-                    <div
-                      class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-400"
-                      :style="{ 'animation-delay': `${index * 200}ms` }"
-                    />
+                <!-- 底部互動提示 -->
+                <div class="mt-auto pt-2">
+                  <div class="flex items-center text-[8px] font-black uppercase tracking-[0.2em] text-red-600 opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:opacity-100">
+                    Explore
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-2 w-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </div>
                 </div>
-
-                <!-- 圖標與文字區域 -->
-                <a :href="item.url" class="block transition-transform duration-300 group-hover:translate-y-[-2px]">
-                  <div class="mb-3 flex items-start gap-3">
-                    <!-- 圖標 -->
-                    <div class="relative flex-shrink-0">
-                      <div
-                        class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r p-3 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
-                        :class="item.color"
-                      >
-                        <component :is="item.icon" class="h-6 w-6 text-white" />
-                      </div>
-                      <!-- 圖標發光效果 -->
-                      <div
-                        class="absolute inset-0 rounded-full bg-gradient-to-r opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-75"
-                        :class="item.color"
-                      />
-                    </div>
-
-                    <!-- 標題與副標題 -->
-                    <div class="flex-1">
-                      <h3
-                        class="mb-2 bg-gradient-to-r from-gray-900 to-red-600 bg-clip-text text-base font-bold text-transparent md:text-lg dark:from-white dark:to-red-200"
-                      >
-                        {{ item.title }}
-                      </h3>
-                      <p
-                        class="text-xs leading-relaxed text-gray-600 transition-colors duration-300 group-hover:text-gray-800 md:text-sm dark:text-gray-400 dark:group-hover:text-gray-300"
-                      >
-                        {{ item.description }}
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- 圖片區域 -->
-                  <div class="relative overflow-hidden rounded-lg">
-                    <img
-                      :src="item.img"
-                      class="h-24 w-full object-cover transition-transform duration-500 group-hover:scale-110 md:h-28"
-                      :alt="item.title"
-                    >
-                    <!-- 圖片遮罩效果 -->
-                    <div
-                      class="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-black/60"
-                    />
-
-                    <!-- 玻璃光澤移動效果 -->
-                    <div
-                      class="animate-glass-shine absolute inset-0 bg-gradient-to-r from-transparent via-red-500/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-white/30"
-                      style="transform: translateX(-100%)"
-                    />
-                  </div>
-                </a>
-
-                <!-- 底部裝飾線 -->
-                <div
-                  class="mt-2 h-px w-0 bg-gradient-to-r transition-all duration-500 group-hover:w-full"
-                  :class="item.color"
-                />
               </div>
 
-              <!-- 懸浮粒子效果 -->
-              <div class="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                <div class="absolute left-1/4 top-1/4 h-1 w-1 animate-ping rounded-full bg-red-500" />
-                <div
-                  class="absolute right-1/3 top-1/3 h-1 w-1 animate-ping rounded-full bg-red-300 dark:bg-white"
-                  style="animation-delay: 0.5s"
-                />
-                <div
-                  class="absolute bottom-1/3 left-1/3 h-1 w-1 animate-ping rounded-full bg-red-400"
-                  style="animation-delay: 1s"
-                />
-              </div>
-            </div>
+              <!-- 鼠標跟隨發光效果 -->
+              <div
+                class="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                :style="{
+                  background: `radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${item.glow} 0%, transparent 80%)`,
+                }"
+              />
+            </a>
           </div>
-        </div>
-      </div>
 
-      <!-- 底部裝飾 -->
-      <div class="mt-3 flex flex-shrink-0 justify-center px-4 md:mt-4">
-        <div class="relative">
-          <!-- 液態玻璃分隔線 -->
-          <div
-            class="h-px w-48 overflow-hidden rounded-full bg-gradient-to-r from-transparent via-red-500 to-transparent md:w-64"
-          >
-            <!-- 流動光澤效果 -->
-            <div
-              class="animate-liquid-flow absolute inset-0 bg-gradient-to-r from-transparent via-red-300/50 to-transparent dark:via-white/50"
-            />
-          </div>
-          <!-- 玻璃反射 -->
-          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-red-200/10 to-transparent blur-sm dark:via-white/10" />
+          <!-- 底部裝飾 -->
+          <footer class="mt-12 flex flex-col items-center gap-4 text-center">
+            <div class="h-px w-16 bg-gradient-to-r from-transparent via-red-600/30 to-transparent" />
+            <p class="text-[9px] font-medium uppercase tracking-[0.4em] text-gray-400 dark:text-gray-600">
+              © 2025 JKF Entertainment. All Rights Reserved.
+            </p>
+          </footer>
         </div>
       </div>
     </main>
@@ -256,62 +187,24 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* 增強液態玻璃效果 */
-.liquid-glass {
-  position: relative;
-  overflow: hidden;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
 }
 
-.liquid-glass::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-  animation: rotateGlass 15s linear infinite;
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-@keyframes rotateGlass {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(220, 38, 38, 0.1);
+  border-radius: 10px;
 }
 
-/* 卡片懸浮時的液態效果 */
-.group:hover .liquid-glass-card {
-  box-shadow:
-    0 8px 32px 0 rgba(239, 68, 68, 0.15),
-    0 16px 64px 0 rgba(239, 68, 68, 0.08),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(220, 38, 38, 0.2);
 }
 
-.dark .group:hover .liquid-glass-card {
-  box-shadow:
-    0 8px 32px 0 rgba(239, 68, 68, 0.2),
-    0 16px 64px 0 rgba(239, 68, 68, 0.1),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.3);
-}
-
-/* 玻璃光澤滾動效果 */
-@keyframes glassScroll {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(220, 38, 38, 0.3);
 }
 </style>
