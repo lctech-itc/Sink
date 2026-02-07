@@ -17,7 +17,8 @@ export function useAPI<T = unknown>(api: string, options?: APIOptions): Promise<
   }) as NitroFetchOptions<NitroFetchRequest>
 
   return $fetch<T>(api, mergedOptions).catch((error) => {
-    if (error?.status === 401) {
+    const status = error?.status ?? error?.statusCode ?? error?.response?.status
+    if (status === 401) {
       removeToken()
       navigateTo('/dashboard/login')
     }

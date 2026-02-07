@@ -9,6 +9,7 @@ interface User {
 }
 
 const { isMobile } = useSidebar()
+const { removeToken } = useAuthToken()
 
 const hostname = computed<string>(() => {
   if (import.meta.client) {
@@ -24,7 +25,7 @@ const user = computed<User>(() => ({
 }))
 
 function logOut() {
-  localStorage.removeItem('SinkSiteToken')
+  removeToken()
   navigateTo('/dashboard/login')
 }
 </script>

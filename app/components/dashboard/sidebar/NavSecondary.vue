@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Languages, Laptop, Moon, Sun } from 'lucide-vue-next'
-import { GitHubIcon } from 'vue3-simple-icons'
+import { Github, Languages, Laptop, Moon, Sun } from 'lucide-vue-next'
 import { useSidebar } from '@/components/ui/sidebar'
 
 const { github } = useAppConfig()
@@ -23,7 +22,7 @@ const { stats, status } = useGithubStats()
                 : 'items-center justify-between',
             ]"
           >
-            <TooltipProvider>
+            <TooltipProvider v-if="github">
               <Tooltip :delay-duration="100">
                 <TooltipTrigger as-child>
                   <a
@@ -37,7 +36,7 @@ const { stats, status } = useGithubStats()
                       hover:text-sidebar-accent-foreground
                     "
                   >
-                    <GitHubIcon class="size-4" />
+                    <Github class="size-4" />
                     <template v-if="state !== 'collapsed'">
                       <Skeleton v-if="status === 'pending'" class="h-4 w-8" />
                       <span
@@ -64,6 +63,7 @@ const { stats, status } = useGithubStats()
               <DropdownMenu>
                 <DropdownMenuTrigger as-child>
                   <button
+                    type="button"
                     class="
                       flex size-8 items-center justify-center rounded-md
                       hover:bg-sidebar-accent
@@ -93,6 +93,7 @@ const { stats, status } = useGithubStats()
               <DropdownMenu>
                 <DropdownMenuTrigger as-child>
                   <button
+                    type="button"
                     class="
                       flex size-8 items-center justify-center rounded-md
                       hover:bg-sidebar-accent

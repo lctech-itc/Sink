@@ -2,7 +2,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (import.meta.server)
     return
 
-  const { getToken } = useAuthToken()
+  const { getToken, removeToken } = useAuthToken()
 
   if (to.path.startsWith('/dashboard') && to.path !== '/dashboard/login') {
     if (!getToken())
@@ -10,12 +10,16 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   if (to.path === '/dashboard/login') {
-    try {
-      await useAPI('/api/verify')
-      return navigateTo('/dashboard')
-    }
-    catch (e) {
-      console.warn(e)
+    const token = getToken()
+    if (token) {
+      try {
+        await useAPI('/api/verify')
+        return navigateTo('/dashboard')
+      }
+      catch (e) {
+        removeToken()
+        console.warn(e)
+      }
     }
   }
 })

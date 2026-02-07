@@ -21,10 +21,10 @@
       "enabled": true
     }
   },
-  "ai": {
-    "binding": "AI",
-    "remote": true
-  },
+  // "ai": {
+  //   "binding": "AI",
+  //   "remote": true
+  // },
   "analytics_engine_datasets": [
     {
       "binding": "ANALYTICS",
@@ -34,8 +34,7 @@
   "kv_namespaces": [
     {
       "binding": "KV",
-      "preview_id": "ef93d42dc4b34969bab404d2e80f8dd3",
-      "id": "ef93d42dc4b34969bab404d2e80f8dd3" // IMPORTANT: Change this to your KV namespace ID
+      "id": "a38cbc3de7284abcbec1d45f75036030" // IMPORTANT: Change this to your KV namespace ID
     }
   ],
   "r2_buckets": [
