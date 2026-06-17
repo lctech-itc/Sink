@@ -2,11 +2,10 @@
 import { Github, Languages, Laptop, Moon, Sun } from 'lucide-vue-next'
 import { useSidebar } from '@/components/ui/sidebar'
 
-const { coffee } = useAppConfig()
 const colorMode = useColorMode()
 const { setLocale, locales } = useI18n()
 const { state } = useSidebar()
-const { hasUpdate, currentVersion, latestVersion } = useVersionCheck()
+const { currentVersion, latestVersion } = useVersionCheck()
 </script>
 
 <template>
@@ -140,7 +139,6 @@ const { hasUpdate, currentVersion, latestVersion } = useVersionCheck()
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </div>
           </div>
         </SidebarMenuItem>
       </SidebarMenu>
