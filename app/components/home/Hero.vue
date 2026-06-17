@@ -1,9 +1,7 @@
-<script setup lang="ts">
-import { ArrowRight } from 'lucide-vue-next'
-import { GitHubIcon, XIcon } from 'vue3-simple-icons'
-import heroUrl from '@/assets/images/hero.svg?url'
+<script setup>
+import { AreaChart } from 'lucide-vue-next'
 
-const { title, description, github, twitter } = useAppConfig()
+const { title, description } = useAppConfig()
 </script>
 
 <template>

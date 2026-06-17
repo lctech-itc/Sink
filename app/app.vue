@@ -30,7 +30,7 @@ useHead(() => ({
   link: [
     {
       rel: 'canonical',
-      href: computed(() => `https://sink.cool${route.path}`),
+      href: computed(() => `https://jkf.tw${route.path}`),
     },
     {
       rel: 'icon',

@@ -1,8 +1,9 @@
 export default defineI18nConfig(() => {
   return {
     legacy: false,
-    fallbackLocale: 'en-US',
-    fallbackWarn: import.meta.dev,
-    missingWarn: import.meta.dev,
+    availableLocales: currentLocales.map(l => l.code),
+    fallbackLocale: 'zh-TW',
+    fallbackWarn: true,
+    missingWarn: true,
   }
 })

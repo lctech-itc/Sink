@@ -133,3 +133,188 @@
     @apply cursor-pointer;
   }
 }
+
+@layer utilities {
+  .container {
+    @apply 2xl:max-w-[1400px] mx-auto px-4;
+  }
+}
+
+@layer utilities {
+  /* 淡入動畫 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  /* 向上滑動動畫 */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* 懸浮動畫 */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* 發光脈衝效果 */
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
+    }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  /* 旋轉光暈 */
+  @keyframes rotateHue {
+    from {
+      filter: hue-rotate(0deg);
+    }
+    to {
+      filter: hue-rotate(360deg);
+    }
+  }
+
+  .animate-rotate-hue {
+    animation: rotateHue 3s linear infinite;
+  }
+
+  /* 液態流動效果 */
+  @keyframes liquidFlow {
+    0% {
+      transform: translateX(-100%) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateX(100%) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-liquid-flow {
+    animation: liquidFlow 8s ease-in-out infinite;
+  }
+
+  @keyframes liquidFlowReverse {
+    0% {
+      transform: translateX(100%) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateX(-100%) rotate(-360deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-liquid-flow-reverse {
+    animation: liquidFlowReverse 10s ease-in-out infinite;
+  }
+
+  /* 液態光澤閃爍 */
+  @keyframes liquidShimmer {
+    0% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+
+  .animate-liquid-shimmer {
+    animation: liquidShimmer 3s ease-in-out infinite;
+  }
+
+  /* 玻璃光澤掃過效果 */
+  @keyframes glassShine {
+    0% {
+      transform: translateX(-100%) skewX(-20deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-20deg);
+    }
+  }
+
+  .animate-glass-shine {
+    animation: glassShine 2s ease-in-out;
+  }
+
+  /* 液態玻璃樣式 */
+  .liquid-glass {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(239, 68, 68, 0.1) 50%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(40px) saturate(150%);
+    -webkit-backdrop-filter: blur(40px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 8px 32px 0 rgba(239, 68, 68, 0.1),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .liquid-glass-card {
+    background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(0, 0, 0, 0.4) 30%,
+      rgba(0, 0, 0, 0.6) 70%,
+      rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.37),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 1px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  /* 玻璃反射效果 */
+  .glass-reflection {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 100%
+    );
+  }
+}

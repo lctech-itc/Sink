@@ -15,11 +15,12 @@ const options = {
   data: props.data,
   type: 'svg' as const,
   margin: 10,
-  qrOptions: { typeNumber: 0 as const, mode: 'Byte' as const, errorCorrectionLevel: 'Q' as const },
-  imageOptions: { hideBackgroundDots: true, imageSize: 0.4, margin: 2 },
-  dotsOptions: { type: 'dots' as const, color: '#000000' },
-  backgroundOptions: { color: '#ffffff' },
-  image: props.image,
+  qrOptions: { typeNumber: '0', mode: 'Byte', errorCorrectionLevel: 'Q' },
+  imageOptions: { hideBackgroundDots: true, imageSize: 0.3, margin: 3 },
+  dotsOptions: { type: 'classy', color: '#000000', gradient: null },
+  backgroundOptions: { color: '#ffffff', gradient: null },
+  image: '/jkf.png',
+  // image: props.image,
   dotsOptionsHelper: {
     colorType: { single: true, gradient: false },
     gradient: {
@@ -41,7 +42,7 @@ const options = {
       rotation: '0',
     },
   },
-  cornersDotOptions: { type: 'dot' as const, color: '#000000' },
+  cornersDotOptions: { color: '#000000' },
   cornersDotOptionsHelper: {
     colorType: { single: true, gradient: false },
     gradient: {
