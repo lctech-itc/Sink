@@ -1,3 +1,5 @@
+import { currentLocales } from './i18n'
+
 export default defineI18nConfig(() => {
   return {
     legacy: false,
